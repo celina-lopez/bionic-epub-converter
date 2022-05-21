@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container py-5 mb-3 content" x-data="{}">
+  <div class="text-end mb-4">
+    <div style="font-size: 2em; cursor: pointer;" x-on:click="location.href='https://github.com/celina-lopez/prettymaps-online'">
+      <i class="fab fa-github"></i>
+    </div>
+  </div>
+  <div class="text-center mb-4">
+    <div class="h1 text-center fancy-font">
+      PRETTYMAPS <span class="text-main">ONLINE</span>
+    </div>
+    <i>Made with prettymaps + forever free cloud app starter</i>
+  </div>
+
+  <div class="d-grid gap-2">
+  
+    <div class="row">
+      <div class="col-md-6">
+        <label for="xCoord">x</label>
+        <input type="number" name="x" step="any" class="form-control" id="x" placeholder="37.7767135">
+      </div>
+      <div class="col-md-6">
+        <label for="yCoord">y</label>
+        <input type="number" name="y" step="any" class="form-control" id="y" placeholder="-122.4353989">
+      </div>
+    </div>
+      <label for="mapName">title</label>
+      <input type="text" name="name" class="form-control" id="mapName" placeholder="Painted Ladies">
+
+      <label for="theme">
+        theme
+        <a href="/examples">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 302.967 302.967" style="height: 20px" xml:space="preserve">
+            <g>
+              <g>
+                <g>
+                  <path style="fill:#010002;" d="M151.483,302.967C67.956,302.967,0,235.017,0,151.483S67.956,0,151.483,0     s151.483,67.956,151.483,151.483S235.017,302.967,151.483,302.967z M151.483,24.416c-70.066,0-127.067,57.001-127.067,127.067     s57.001,127.067,127.067,127.067s127.067-57.001,127.067-127.067S221.555,24.416,151.483,24.416z"/>
+                </g>
+                <g>
+                  <g>
+                    <path style="fill:#010002;" d="M116.586,118.12c1.795-4.607,4.297-8.588,7.511-11.961c3.225-3.389,7.114-6.016,11.667-7.898      c4.547-1.904,9.633-2.845,15.262-2.845c7.261,0,13.32,0.995,18.183,2.997c4.857,1.996,8.768,4.482,11.738,7.441      c2.964,2.97,5.091,6.168,6.369,9.584c1.273,3.432,1.915,6.636,1.915,9.595c0,4.901-0.642,8.947-1.915,12.118      c-1.278,3.171-2.866,5.88-4.759,8.131c-1.898,2.252-3.987,4.172-6.293,5.755c-2.295,1.588-4.471,3.171-6.516,4.759      c-2.045,1.583-3.862,3.394-5.445,5.439c-1.588,2.04-2.589,4.601-2.991,7.664v5.831H140.6v-6.908      c0.305-4.395,1.153-8.072,2.529-11.036c1.382-2.964,2.991-5.499,4.83-7.598c1.844-2.089,3.786-3.911,5.836-5.445      c2.04-1.539,3.927-3.073,5.673-4.591c1.73-1.545,3.144-3.225,4.221-5.069c1.071-1.833,1.556-4.15,1.452-6.908      c0-4.705-1.148-8.18-3.454-10.427c-2.295-2.257-5.493-3.378-9.589-3.378c-2.758,0-5.134,0.533-7.131,1.605      s-3.628,2.513-4.911,4.302c-1.278,1.795-2.225,3.894-2.834,6.288c-0.615,2.415-0.919,4.982-0.919,7.756h-22.55      C113.85,127.785,114.791,122.732,116.586,118.12z M162.536,183.938v23.616h-24.09v-23.616H162.536z"/>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            </svg>
+        </a>
+      </label>
+      <select class="form-control" id="theme_num" name="theme_num">
+        <option selected value="0">kawaii pink</option>
+        <option value="1">lemoncello yellow</option>
+        <option value="2">blue dabadi daba</option>
+        <option value="3">cafe dream</option>
+        <option value="4">yellowgreen!</option>
+        <option value="5">grape soda</option>
+      </select>
+      <button id="urlSubmit" class="btn btn-main btn-lg btn-block">
+        Generate Image
+      </button>
+    <div class="row justify-content-center mt-3">
+      <div class="col-auto">
+        <div id="display" style="max-width: 500px;">
+          <img src="" id="imgHere" width="500" class="rounded" />
+          <div class="d-flex justify-content-center">
+            <div class="d-none" id="imageSpinner" role="status">
+              <svg class="tea" width="37" height="48" viewbox="0 0 37 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.0819 17H3.02508C1.91076 17 1.01376 17.9059 1.0485 19.0197C1.15761 22.5177 1.49703 29.7374 2.5 34C4.07125 40.6778 7.18553 44.8868 8.44856 46.3845C8.79051 46.79 9.29799 47 9.82843 47H20.0218C20.639 47 21.2193 46.7159 21.5659 46.2052C22.6765 44.5687 25.2312 40.4282 27.5 34C28.9757 29.8188 29.084 22.4043 29.0441 18.9156C29.0319 17.8436 28.1539 17 27.0819 17Z" stroke="var(--secondary)" stroke-width="2"></path>
+                <path d="M29 23.5C29 23.5 34.5 20.5 35.5 25.4999C36.0986 28.4926 34.2033 31.5383 32 32.8713C29.4555 34.4108 28 34 28 34" stroke="var(--secondary)" stroke-width="2"></path>
+                <path id="teabag" fill="var(--secondary)" fill-rule="evenodd" clip-rule="evenodd" d="M16 25V17H14V25H12C10.3431 25 9 26.3431 9 28V34C9 35.6569 10.3431 37 12 37H18C19.6569 37 21 35.6569 21 34V28C21 26.3431 19.6569 25 18 25H16ZM11 28C11 27.4477 11.4477 27 12 27H18C18.5523 27 19 27.4477 19 28V34C19 34.5523 18.5523 35 18 35H12C11.4477 35 11 34.5523 11 34V28Z"></path>
+                <path id="steamL" d="M17 1C17 1 17 4.5 14 6.5C11 8.5 11 12 11 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="var(--secondary)"></path>
+                <path id="steamR" d="M21 6C21 6 21 8.22727 19 9.5C17 10.7727 17 13 17 13" stroke="var(--secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg> <span style="vertical-align: -webkit-baseline-middle;">Please allow up to five minutes...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-copyright text-center py-3">
+  <i>This was built with <a target="_blank" href="https://forever-free-cloud-app-starter.chriszhu.me/">Forever-Free Cloud App Starter</a></i>
+</div>
+
+<script>
+  document.getElementById("urlSubmit").addEventListener("click", function () {
+    document.getElementById("imageSpinner").setAttribute("class", "")
+    let request = new XMLHttpRequest();
+    queryString = "?name=" + document.getElementById("mapName").value + "&x=" + document.getElementById("x").value + "&y=" + document.getElementById("y").value + "&theme_num=" + document.getElementById("theme_num").value
+    request.open('GET', "/api" + queryString);
+    request.responseType = 'text';
+    request.onload = function() {
+      const text = request.response.slice(1, -1);
+      document.getElementById("imgHere").setAttribute("src", "data:image/png;base64," + text);
+      document.getElementById("imageSpinner").setAttribute("class", "d-none");
+    };
+    request.send()
+  });
+
+</script>
+
+
+{% endblock %}
