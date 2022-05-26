@@ -9,6 +9,7 @@ import random
 import mistune
 from dotenv import load_dotenv
 from services import converter
+from starlette.background import BackgroundTasks
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -28,21 +29,14 @@ async def index(request: Request):
 
 
 @app.post("/upload")
-  async def upload(file: UploadFile = File(...)):
-    try:
-      file_name = f"files/{uploaded_file.filename}"
-
-        converter.create_bionic_book(file_name)
-      with open(file.filename, 'wb') as f:
-        f.write(contents)
-    except Exception:
-      return {"message": "There was an error uploading the file"}
-
-    return {"message": f"Successfuly uploaded {file.filename}"}
-    
-
-
-
+async def upload(file: UploadFile = File(...)):
+  file_name = f"files/{uploaded_file.filename}"
+  file = converter.create_bionic_book(file_name)
+  return FileResponse(
+    file,
+    background=BackgroundTask(converter.remove_file(file)),
+  )
+   
 
 if __name__ == "__main__":
     load_dotenv()

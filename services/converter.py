@@ -2,6 +2,8 @@ import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup
 import zipfile
+import tempfile
+import os
 
 file_name = "/Users/marisa/Downloads/test.epub"
 
@@ -18,10 +20,12 @@ def return_num_of_bolded_letters(word):
   else:
     return length_of_word - 2
 
+
 def chapter_to_str(chapter):
   soup = BeautifulSoup(chapter.get_body_content(), "html.parser")
   text = [para.get_text() for para in soup.find_all("p")]
   return " ".join(text)
+
 
 def read_epub(book):
   items = list(book.get_items_of_type(ebooklib.ITEM_DOCUMENT))
@@ -31,9 +35,11 @@ def read_epub(book):
     chapters[item_id] = chapter_to_str(item)
   return chapters
 
+
 def bionic_word(word):
   end = return_num_of_bolded_letters(word)
   return "<b>" + word[0:end] + "</b>" + word[end:len(word)]
+
 
 def create_bionic_text(text):
   words = text.split(' ')
@@ -42,35 +48,19 @@ def create_bionic_text(text):
     bionic_words.append(bionic_word(word))
   return " ".join(bionic_words)
 
+
 def create_bionic_book(file_name):
   book = epub.read_epub(file_name)
   chapter_by_id = read_epub(book)
-
   for chapter_id in chapter_by_id:
     content = create_bionic_text(chapter_by_id[chapter_id])
     book.get_item_with_id(chapter_id).set_content(content)
-
   # write to the file
-  epub.write_epub('testing.epub', book, {})
+  # epub.write_epub('testing.epub', book, {})
   tmp = tempfile.SpooledTemporaryFile()
+  epub.EpubWriter(tmp, book, {}).write()
+  return tmp
+
+def remove_file(temp_file):
+  os.remove(temp_file)
   
-
-with tempfile.SpooledTemporaryFile() as tmp:
-    with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as archive:
-        archive.writestr('something.txt', 'Some Content Here')
-
-    # Reset file pointer
-    tmp.seek(0)
-
-    # Write file data to response
-    return HttpResponse(tmp.read(), mimetype='application/x-zip-compressed')
-    
- # check for the option allowZip64
-        self.out = zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED)
-        self.out.writestr('mimetype', 'application/epub+zip', compress_type=zipfile.ZIP_STORED)
-
-        self._write_container()
-        self._write_opf()
-        self._write_items()
-
-        self.out.close()
