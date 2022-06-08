@@ -1,11 +1,7 @@
 import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup
-import zipfile
-import tempfile
-import os
 
-file_name = "/Users/marisa/Downloads/test.epub"
 
 def return_num_of_bolded_letters(word):
   length_of_word = len(word)
@@ -49,18 +45,10 @@ def create_bionic_text(text):
   return " ".join(bionic_words)
 
 
-def create_bionic_book(file_name):
+def create_bionic_book(file_name, book_file):
   book = epub.read_epub(file_name)
   chapter_by_id = read_epub(book)
   for chapter_id in chapter_by_id:
     content = create_bionic_text(chapter_by_id[chapter_id])
     book.get_item_with_id(chapter_id).set_content(content)
-  # write to the file
-  # epub.write_epub('testing.epub', book, {})
-  tmp = tempfile.SpooledTemporaryFile()
-  epub.EpubWriter(tmp, book, {}).write()
-  return tmp
-
-def remove_file(temp_file):
-  os.remove(temp_file)
-  
+  epub.write_epub(book_file, book, {})

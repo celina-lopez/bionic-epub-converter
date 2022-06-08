@@ -1,12 +1,16 @@
 body {
   background-color: rgb(255, 253, 251);
   height: 100%;
-  font-family: "Lato";
+  font-family: 'Rubik', sans-serif;
   color: #333;
 }
 
 .fancy-font {
-  font-family: "Azeret Mono", monospace;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 200;
+}
+.fancy-font b {
+  font-weight: 600;
 }
 
 .text-main {
@@ -26,3 +30,29 @@ body {
 .content {
   max-width: 600px;
 }
+
+.btn-file {
+  background-color: #f79159;
+  box-shadow: 0 6px #f57128;
+  transition: none;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Rubik", sans-serif;
+  font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+
+.btn-file:hover {
+  background-color: darken(#f15d22, 10%);
+    box-shadow: 0 4px darken(#f79159, 10%);
+    top: 2px;
+  }
