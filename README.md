@@ -1,7 +1,7 @@
 
 
 ## 🏁 Getting started <a name = "getting_started"></a>
-Website is here! [https://prettymaps-online-nzcbpymxfq-uc.a.run.app/](https://bionic-reading-nzcbpymxfq-uc.a.run.app/)
+Website is here! https://bionic-reading-nzcbpymxfq-uc.a.run.app/
 
 Inspired by https://bionic-reading.com/
 
