@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+FROM --platform=linux/amd64 tiangolo/uvicorn-gunicorn-fastapi:python3.7
 
 # Install Python dependencies
 COPY requirements.txt /app/requirements.txt
