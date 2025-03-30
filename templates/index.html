@@ -1,32 +1,40 @@
-{% extends "layout.html" %}
-{% block body %}
+{% extends "layout.html" %} {% block body %}
 
 <div class="container py-5 mb-3 content" x-data="{}">
   <div class="text-end mb-4">
-    <div style="font-size: 2em; cursor: pointer;" x-on:click="location.href='https://github.com/celina-lopez/bionic-epub-converter'">
+    <div
+      style="font-size: 2em; cursor: pointer"
+      x-on:click="location.href='https://github.com/celina-lopez/bionic-epub-converter'"
+    >
       <i class="fab fa-github"></i>
     </div>
   </div>
   <div class="text-center mb-4">
     <div class="h1 text-center fancy-font">
-      <b>BION</b>IC <span class="text-main"><b>READI</b>NG E-<b>PU</b>B <b>CONVERT</b>ER</span>
+      <b>BION</b>IC
+      <span class="text-main"
+        ><b>READI</b>NG E-<b>PU</b>B <b>CONVERT</b>ER</span
+      >
     </div>
-    <i><b>inspir</b>ed <b>b</b>y <a target="_blank" href="https://bionic-reading.com/"><b>bion</b>ic-<b>read</b>ing</a></i>
-  </div>
-  <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <form action="/upload"
-    method="POST" target="dummyframe" enctype="multipart/form-data"
+    <i
+      ><b>inspir</b>ed <b>b</b>y
+      <a target="_blank" href="https://bionic-reading.com/"
+        ><b>bion</b>ic-<b>read</b>ing</a
+      ></i
     >
-      <input type="file" name="file" />
-      <div class="text-center"><button type="submit" class="btn btn-file mt-3"><b>conve</b>rt</button></div>
-      
-    </form>
+  </div>
+  <iframe name="dummyframe" id="dummyframe" style="display: none"></iframe>
+  <form
+    action="/upload"
+    method="POST"
+    target="dummyframe"
+    enctype="multipart/form-data"
+  >
+    <input type="file" name="file" />
+    <div class="text-center">
+      <button type="submit" class="btn btn-file mt-3"><b>conve</b>rt</button>
+    </div>
+  </form>
 </div>
-
-<div class="footer-copyright text-center py-3">
-  <i><b>Mad</b>e <b>wit</b>h <a target="_blank" href="https://forever-free-cloud-app-starter.chriszhu.me/"><b>forev</b>er <b>fre</b>e <b>clo</b>ud <b>ap</b>p <b>start</b>er</a></i>
-</div>
-
-
 
 {% endblock %}
